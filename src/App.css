@@ -1,0 +1,30 @@
+#root {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #040711;
+}
+
+#root header {
+  background-image: url('images/hero_img.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 55vh;
+
+}
+main {
+  width: 100%;
+  position: absolute;
+  top: 155px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+
+}
+.logo {
+  position: absolute;
+  margin-top: 92px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
