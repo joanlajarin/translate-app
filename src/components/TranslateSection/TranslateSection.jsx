@@ -4,22 +4,22 @@ import './TranslateSection.css'
 
 export default function TranslateSection({translateText}) {
 
-    const [text, setText] = useState('Hello, how are you?');
+    const [text, setText] = useState('Hello, how are you?')
+ //   const [textTrans, setTextTrans] = useState(translateText(text))
 
-    let textToTranslate = ""
     const handleChange = (event) => {
       setText(event.target.value)
     }
 
     function translate() {
-        translateText(textToTranslate.innerHTML)
+        console.log("translate")
+        console.log(text)
+        translateText(text)
     }
 
     useEffect(() => {
         const btnTranslate = document.getElementById("btn-translate")
         btnTranslate.addEventListener("click", translate)
-
-        textToTranslate = document.querySelector(".text-to-translate")
     },[])
     
 
@@ -41,7 +41,7 @@ export default function TranslateSection({translateText}) {
                         <img src="images/Copy.svg"></img>
                     </button>
                 </div>
-                <button id="btn-translate"><img src="images/Sort_alfa.svg"></img>Translate</button>
+                <button id="btn-translate" onClick={translate}><img src="images/Sort_alfa.svg"></img>Translate</button>
             </div>
         </section>
     )

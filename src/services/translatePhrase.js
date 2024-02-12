@@ -1,20 +1,23 @@
 import React from "react"
+import { useEffect } from "react"
 import { useState } from "react"
 
-export default function translatePhrase (text) {
-
+function translatePhrase (text) {
 
     console.log(text)
-    let phraseTranslated = text
+ //   let phraseTranslated = text
+     const url = `https://api.mymemory.translated.net/get?q=${text}!&langpair=en|fr`
 
-    fetch('https://api.mymemory.translated.net/get?q='+ text +'!&langpair=en|fr')
-    .then(response => response.json())
-        .then(data => {
-            console.log(data.responseData.translatedText)   
-            phraseTranslated = data.responseData.translatedText
-        })
-            .catch(error => {
-                console.log(error)
+        return fetch(url)
+        .then(response => response.json())
+            .then(data => {
+                console.log(data.responseData.translatedText)   
+                const phrase = data.responseData.translatedText
+                return phrase
             })
-    return phraseTranslated           
-}
+                .catch(error => {
+                    console.log(error)
+                })
+}      
+
+export default translatePhrase

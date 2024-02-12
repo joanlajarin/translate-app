@@ -1,23 +1,29 @@
 import React from "react"
 import { useState } from "react";
 import './TranslateSectionResult.css'
+import { useEffect } from "react";
 
-export default function TranslateSection() {
+export default function TranslateSection({data}) {
 
-    const [text, setText] = useState('Hello, how are you?');
+    const [text, setText] = useState('');
 
     const handleChange = (event) => {
       setText(event.target.value)
     }
     
+    useEffect(()=> {
+        console.log(data)
+        setText(data)
+    },[data])
+    
     return (
         <section className="section-translate">
-            <div className="languages">
-                <a className="a-language">English</a>
-                <a className="a-language">French</a>
-                <a id="spanish-link" className="a-language">Spanish<img src="/public/images/Expand_down.svg"></img></a>
+            <div className="languages-translated">
+                <a className="a-language-translated">English</a>
+                <a className="a-language-translated">French</a>
+                <a id="spanish-link" className="a-language-translated">Spanish<img src="/public/images/Expand_down.svg"></img></a>
             </div>
-        <textarea  className="text-to-translate"  value={text} onChange={handleChange}></textarea >
+        <textarea  className="text-to-translate" value={text} onChange={handleChange}></textarea >
             <div className="buttons">
                 <div className="btn">
                     <button className="btn-style">
