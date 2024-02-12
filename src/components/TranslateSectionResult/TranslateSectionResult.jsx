@@ -14,13 +14,14 @@ export default function TranslateSection({data}) {
     useEffect(()=> {
         console.log(data)
         setText(data)
+        
     },[data])
     
     return (
         <section className="section-translate">
             <div className="languages-translated">
                 <a className="a-language-translated">English</a>
-                <a className="a-language-translated">French</a>
+                <a className="a-language-translated active">French</a>
                 <a id="spanish-link" className="a-language-translated">Spanish<img src="/public/images/Expand_down.svg"></img></a>
             </div>
         <textarea  className="text-to-translate" value={text} onChange={handleChange}></textarea >

@@ -34,6 +34,11 @@
     color: #F9FAFB;
     border-radius: 10px;
 }
+.a-language-translated.active{
+    background-color: #4D5562;
+    color: #F9FAFB;
+    border-radius: 10px;
+}
 .textarea-text {
     width: 100%;
     background-color: #212936cc;

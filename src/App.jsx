@@ -1,17 +1,25 @@
 import { useState } from 'react'
-import './App.css'
 import TranslateSection from './components/TranslateSection/TranslateSection'
 import TranslateSectionResult from './components/TranslateSectionResult/TranslateSectionResult'
-import translatePhrase from './services/translatePhrase'
+import './App.css'
 
 function App() {
 
+  const [translate, setTranslate] = useState({
+    "text":'Hello, how are you?',
+    "language":'en',
+    "languageTotranslate": 'fr'
+  })
   const [phraseTranslated, setPhraseTranslated] = useState("")
 
-  const handleTranslate = (text) => {
-    console.log(text)
+  
+  const handleTranslate = (toTranslate) => {
+    console.log(toTranslate)
+    setTranslate(prevTranslate =>{
+      return {...prevTranslate, "text": toTranslate.text, "language":toTranslate.language} 
+    })
 
-    const url = `https://api.mymemory.translated.net/get?q=${text}!&langpair=en|fr`
+    const url = `https://api.mymemory.translated.net/get?q=${translate.text}!&langpair=${translate.language}|fr`
     fetch(url)
       .then(response => response.json())
          .then(data => {
