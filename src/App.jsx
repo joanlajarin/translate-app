@@ -2,6 +2,7 @@ import { useState } from 'react'
 import TranslateSection from './components/TranslateSection/TranslateSection'
 import TranslateSectionResult from './components/TranslateSectionResult/TranslateSectionResult'
 import './App.css'
+import { useEffect } from 'react'
 
 function App() {
 
@@ -18,8 +19,16 @@ function App() {
     setTranslate(prevTranslate =>{
       return {...prevTranslate, "text": toTranslate.text, "language":toTranslate.language} 
     })
+  }
+  const handleTranslateFromChild = (data) => {
+    setTranslate(prevTranslate =>{
+      return {...prevTranslate, "languageTotranslate": data} 
+    })
+  }
 
-    const url = `https://api.mymemory.translated.net/get?q=${translate.text}!&langpair=${translate.language}|fr`
+
+  useEffect(()=>{
+    const url = `https://api.mymemory.translated.net/get?q=${translate.text}&langpair=${translate.language}|${translate.languageTotranslate}`
     fetch(url)
       .then(response => response.json())
          .then(data => {
@@ -30,7 +39,7 @@ function App() {
          .catch(error => {
              console.log(error)
          })
-  }
+  },[translate])
 
   return (
     <div>
@@ -39,7 +48,7 @@ function App() {
       </header>
       <main>
         <TranslateSection translateText={handleTranslate}/>
-        <TranslateSectionResult data={phraseTranslated}/>
+        <TranslateSectionResult data={phraseTranslated} onData={handleTranslateFromChild}/>
       </main>
     </div>
   )

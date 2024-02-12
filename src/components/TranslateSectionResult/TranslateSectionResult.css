@@ -19,6 +19,8 @@
     color: #F9FAFB;
     font-size: 16px;
     outline: none;
+    resize: none;
+
 }
 .languages-translated {
     display: flex;
@@ -39,6 +41,10 @@
     color: #F9FAFB;
     border-radius: 10px;
 }
+.div-languages-button {
+    display: flex;
+    justify-content: space-between;
+}
 .textarea-text {
     width: 100%;
     background-color: #212936cc;
@@ -49,6 +55,7 @@
     justify-content: space-between;
     align-items: flex-end;
     margin-top: 12px;
+    flex-grow: 1;
 }
 .btn {
     display: flex;

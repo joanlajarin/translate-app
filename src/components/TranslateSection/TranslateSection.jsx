@@ -7,7 +7,6 @@ export default function TranslateSection({translateText}) {
     const [toTranslate, setToTranslate] = useState({
         "text":'Hello, how are you?',
         "language":'en'
-
     })
     const [language, setLanguage] = useState('en')
     const [totalLetters, setTotalLetters] = useState(0)
@@ -28,26 +27,28 @@ export default function TranslateSection({translateText}) {
     }
 
     function translate() {
-        console.log("translate")
-        console.log(toTranslate)
         translateText(toTranslate)
     }
+    let aLanguages
+    
     const handleClick = (filterEl) => {
         const filter = filterEl.target.attributes.value.nodeValue
+        aLanguages.forEach(filterLang => {
+            filterLang.classList.remove('active')
+        })
         filterEl.target.classList.toggle('active')
-        setLanguage(filter)
-        console.log(language)
+        setToTranslate(prevToTranslate => {
+            return {...prevToTranslate, "language": filter}
+        })
     }
     useEffect(() => {
-        console.log("useEffect")
         const btnTranslate = document.getElementById("btn-translate")
         btnTranslate.addEventListener("click", translate)
 
-        const aLanguages = document.querySelectorAll(".a-language")
+        aLanguages = document.querySelectorAll(".a-language")
         aLanguages.forEach(filterEl => {
             filterEl.addEventListener("click",handleClick)
         })
-        countLetters()
     },[])
     
 
