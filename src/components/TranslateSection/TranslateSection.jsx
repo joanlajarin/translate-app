@@ -1,7 +1,6 @@
 import React from "react"
 import { useState, useEffect } from "react"
 import './TranslateSection.css'
-import { GlobalStateProvider } from "../../context/GlobalStateContext"
 
 export default function TranslateSection({translateText}) {
 
@@ -75,7 +74,6 @@ export default function TranslateSection({translateText}) {
         })   
         const btnPlayText = document.getElementById("btn-play-text-1")
         btnPlayText.addEventListener("click", playText)
-
     },[toTranslate])
     
     useEffect(()=>{
@@ -91,28 +89,28 @@ export default function TranslateSection({translateText}) {
 
          const btnCopyText = document.getElementById("btn-copy-text-1")
          btnCopyText.addEventListener("click", copyText)
-    })
+    },[])
     return (
-            <section className="section-translate">
-                <div className="languages">
-                    <a className="a-detect-language">Detect Language</a>
-                    <a className="a-language active" value="en">English</a>
-                    <a className="a-language" value="fr">French</a>
-                    <a id="spanish-link" className="a-language" value="es">Spanish<img src="/images/Expand_down.svg"></img></a>
+        <section className="section-translate">
+            <div className="languages">
+                <a className="a-detect-language">Detect Language</a>
+                <a className="a-language active" value="en">English</a>
+                <a className="a-language" value="fr">French</a>
+                <a id="spanish-link" className="a-language" value="es">Spanish<img src="/images/Expand_down.svg"></img></a>
+            </div>
+        <textarea id="translate-1" className="text-to-translate" value={toTranslate.text} onChange={handleChange} maxLength="500"></textarea >
+        <span className="letters">{totalLetters}/500</span>
+            <div className="buttons">
+                <div className="btn">
+                    <button className="btn-style" id="btn-play-text-1">
+                        <img src="images/sound_max_fill.svg"></img>
+                    </button> 
+                     <button className="btn-style" id="btn-copy-text-1">
+                        <img src="images/Copy.svg"></img>
+                    </button>
                 </div>
-            <textarea id="translate-1" className="text-to-translate" value={toTranslate.text} onChange={handleChange} maxLength="500"></textarea >
-            <span className="letters">{totalLetters}/500</span>
-                <div className="buttons">
-                    <div className="btn">
-                        <button className="btn-style" id="btn-play-text-1">
-                            <img src="images/sound_max_fill.svg"></img>
-                        </button> 
-                        <button className="btn-style" id="btn-copy-text-1">
-                            <img src="images/Copy.svg"></img>
-                        </button>
-                    </div>
-                    <button id="btn-translate" onClick={translate}><img src="images/Sort_alfa.svg"></img>Translate</button>
-                </div>
-            </section>
+                <button id="btn-translate" onClick={translate}><img src="images/Sort_alfa.svg"></img>Translate</button>
+            </div>
+        </section>
     )
 }
