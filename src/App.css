@@ -17,7 +17,7 @@
 main {
   width: 100%;
   position: absolute;
-  top: 170px;
+  top: 180px;
   display: flex;
   justify-content: center;
   gap: 15px;
@@ -26,7 +26,7 @@ main {
 }
 .logo {
   position: absolute;
-  margin-top: 92px;
+  margin-top: 105px;
   left: 50%;
   transform: translate(-50%, -50%);
 }
