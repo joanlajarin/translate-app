@@ -128,7 +128,7 @@ export default function TranslateSection({translateText, data, lang}) {
          btnCopyText.addEventListener("click", copyText)
     },[])
     return (
-        <section className="section-translate">
+        <section className="section-translate-left">
             <div className="languages">
                 <a className="a-detect-language">Detect Language</a>
                 <a className="a-language active" value="en">English</a>

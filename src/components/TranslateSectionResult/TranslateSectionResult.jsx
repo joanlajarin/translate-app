@@ -110,11 +110,11 @@ export default function TranslateSection({data, interchangeLanguage, onData, lan
 
     },[])
     function nothing(){
-        
+
     }
 
     return (
-        <section className="section-translate">
+        <section className="section-translate-right">
             <div className="div-languages-button">
                 <div className="languages-translated">
                     <a className="a-language-translated" value='en'>English</a>
