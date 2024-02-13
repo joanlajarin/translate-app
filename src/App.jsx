@@ -14,9 +14,9 @@ function App() {
   const [phraseTranslated, setPhraseTranslated] = useState("")
 
   //to change Languages
-  const [langChange1, setLangChange1] = useState("")
-  const [langChange2, setLangChange2] = useState("")
-
+  const [langChangeLeft, setLangChangeLeft] = useState("")
+  const [langChangeRight, setLangChangeRight] = useState("")
+  const [textChange, setTextChange] = useState("")
   
   const handleTranslate = (toTranslate) => {
     console.log(toTranslate)
@@ -24,20 +24,29 @@ function App() {
       return {...prevTranslate, "text": toTranslate.text, "language":toTranslate.language} 
     })
   }
-  const handleTranslateFromChild = (data) => {
-    setTranslate(prevTranslate =>{
-      return {...prevTranslate, "languageTotranslate": data} 
-    })
-  }
+   const handleTranslateFromChild = (data) => {
+     setTranslate(prevTranslate =>{
+       return {...prevTranslate, "languageTotranslate": data} 
+     })
+   }
 
-  const handleChangeLanguage = () => {
+  const handleChangeLanguage = (data) => {
     console.log("handleChangeLanguage")
-    setLangChange1(translate.language)
-    setLangChange2(translate.languageTotranslate)
+
+    setLangChangeLeft(translate.languageTotranslate)
+    setLangChangeRight(translate.language)
+    console.log(langChangeLeft)
+    console.log(langChangeRight)
+
+
+    setPhraseTranslated(translate.text)
+    setTextChange(data)
+
     setTranslate(prevTranslate =>{
       return {...prevTranslate, "language":translate.languageTotranslate, "languageTotranslate": translate.language} 
     })
   }
+
 
   useEffect(()=>{
     const url = `https://api.mymemory.translated.net/get?q=${translate.text}&langpair=${translate.language}|${translate.languageTotranslate}`
@@ -59,8 +68,8 @@ function App() {
         <img className="logo" src='images/logo.svg'></img>
       </header>
       <main>
-        <TranslateSection lang={langChange2} translateText={handleTranslate}/>
-        <TranslateSectionResult lang={langChange1} data={phraseTranslated} onData={handleTranslateFromChild} interchangeLanguage={handleChangeLanguage}/>
+        <TranslateSection lang={langChangeLeft} translateText={handleTranslate} data={textChange}/>
+        <TranslateSectionResult lang={langChangeRight} data={phraseTranslated} onData={handleTranslateFromChild}  interchangeLanguage={handleChangeLanguage}/>
       </main>
     </div>
   )

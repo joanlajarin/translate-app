@@ -3,7 +3,7 @@ import { useState } from "react"
 import './TranslateSectionResult.css'
 import { useEffect } from "react"
 
-export default function TranslateSection({data, onData, interchangeLanguage, lang}) {
+export default function TranslateSection({data, interchangeLanguage, onData, lang}) {
     let synth
     let voices
     let aLanguagesTranslated
@@ -14,15 +14,17 @@ export default function TranslateSection({data, onData, interchangeLanguage, lan
     //check initial render
     const [isInitialRender, setIsInitialRender] = useState(true)
 
-    const handleChange = (event) => {
-      setText(event.target.value)
-    }
     
     useEffect(()=> {
         console.log(data)
         setText(data)
     },[data])
     
+    function changeLanguage() {
+        console.log(text)
+        interchangeLanguage(text)
+    }
+
     useEffect(()=> {
         if(isInitialRender) {
             setIsInitialRender(false)
@@ -57,13 +59,11 @@ export default function TranslateSection({data, onData, interchangeLanguage, lan
         setLanguage(filter)
     }
 
-    useEffect(() => {
-        onData(language)
-    },[language])
+     useEffect(() => {
+         onData(language)
+     },[language])
 
-    const changeLanguage = () => {
-        interchangeLanguage()
-    }
+
 
     const playText = () => {
         synth = window.speechSynthesis
@@ -86,15 +86,15 @@ export default function TranslateSection({data, onData, interchangeLanguage, lan
         })   
         const btnPlayText = document.getElementById("btn-play-text-2")
         btnPlayText.addEventListener("click", playText)
+        
     },[text])
+
 
     useEffect(() =>{
         aLanguagesTranslated = document.querySelectorAll(".a-language-translated")
         aLanguagesTranslated.forEach( filterLanguage => {
             filterLanguage.addEventListener("click", handleClick)
         })
-        const btnChangeLang = document.getElementById("btn-change-languages")
-        btnChangeLang.addEventListener("click", changeLanguage)
 
         const btnPlayText = document.getElementById("btn-play-text-2")
         btnPlayText.addEventListener("click", playText)
@@ -109,7 +109,9 @@ export default function TranslateSection({data, onData, interchangeLanguage, lan
         btnCopyText.addEventListener("click", copyText)
 
     },[])
-
+    function nothing(){
+        
+    }
 
     return (
         <section className="section-translate">
@@ -120,12 +122,12 @@ export default function TranslateSection({data, onData, interchangeLanguage, lan
                     <a id="spanish-link" className="a-language-translated" value="es">Spanish<img src="/images/Expand_down.svg"></img></a>
                 </div>
                 <div>
-                    <button className="btn-style" id="btn-change-languages">
+                    <button className="btn-style" id="btn-change-languages" onClick={changeLanguage}>
                         <img src="images/Horizontal_top_left_main.svg"></img>
                     </button>
                 </div>
             </div>
-        <textarea  id="translate-2" className="text-to-translate" value={text} onChange={handleChange}></textarea >
+        <textarea  id="translate-2" className="text-to-translate" value={text} onChange={nothing}></textarea >
             <div className="buttons">
                 <div className="btn">
                     <button className="btn-style" id="btn-play-text-2">

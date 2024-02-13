@@ -11,7 +11,8 @@
   background-position: center;
   background-size: cover;
   height: 55vh;
-
+  position: relative;
+  z-index: 1;
 }
 main {
   width: 100%;
@@ -20,7 +21,8 @@ main {
   display: flex;
   justify-content: center;
   gap: 15px;
-
+  flex-wrap: wrap;
+  background-color:#040711;
 }
 .logo {
   position: absolute;

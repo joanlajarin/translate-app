@@ -2,7 +2,7 @@ import React from "react"
 import { useState, useEffect } from "react"
 import './TranslateSection.css'
 
-export default function TranslateSection({translateText, lang}) {
+export default function TranslateSection({translateText, data, lang}) {
 
     let synth
     let voices
@@ -17,6 +17,14 @@ export default function TranslateSection({translateText, lang}) {
     const [isInitialRender, setIsInitialRender] = useState(true)
 
  //   const [textTrans, setTextTrans] = useState(translateText(text))
+    useEffect(()=> {
+        if(data != "") {
+            console.log(data)
+            setToTranslate(prevToTranslate => {
+                return {...prevToTranslate, "text": data}
+            })
+        }
+    },[data])
 
     const handleChange = (event) => {
         setToTranslate(prevToTranslate => {
@@ -28,30 +36,30 @@ export default function TranslateSection({translateText, lang}) {
     }, [toTranslate])
 
     useEffect(()=> {
-        if(isInitialRender) {
-            setIsInitialRender(false)
-        } else {
-            console.log("lang useEffect")
-            console.log(lang)
-            //poner el lenguage al que venga
-                setToTranslate(prevToTranslate => {
-                    return {...prevToTranslate, "language": lang}
-                })
-            //quitar todos los gighlights
-                        //seleccionar el filtro del lenguaje correcto
+         if(isInitialRender) {
+             setIsInitialRender(false)
+         } else {
+             console.log("lang useEffect")
+             console.log(lang)
+             //poner el lenguage al que venga
+                 setToTranslate(prevToTranslate => {
+                     return {...prevToTranslate, "language": lang}
+                 })
+             //quitar todos los gighlights
+                         //seleccionar el filtro del lenguaje correcto
 
-            aLanguages = document.querySelectorAll(".a-language")
+             aLanguages = document.querySelectorAll(".a-language")
 
-            aLanguages.forEach(filterLang => {
-                filterLang.classList.remove('active')
-                if(filterLang.attributes.value.nodeValue === lang){
+             aLanguages.forEach(filterLang => {
+                 filterLang.classList.remove('active')
+                 if(filterLang.attributes.value.nodeValue === lang){
                     filterLang.classList.toggle('active')
-                }
-            })
+                 }
+             })
 
-        }
+         }
 
-    },[lang])
+     },[lang])
 
     const countLetters = () => {
         setTotalLetters(toTranslate.text.length) 
