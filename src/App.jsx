@@ -13,6 +13,10 @@ function App() {
   })
   const [phraseTranslated, setPhraseTranslated] = useState("")
 
+  //to change Languages
+  const [langChange1, setLangChange1] = useState("")
+  const [langChange2, setLangChange2] = useState("")
+
   
   const handleTranslate = (toTranslate) => {
     console.log(toTranslate)
@@ -26,6 +30,14 @@ function App() {
     })
   }
 
+  const handleChangeLanguage = () => {
+    console.log("handleChangeLanguage")
+    setLangChange1(translate.language)
+    setLangChange2(translate.languageTotranslate)
+    setTranslate(prevTranslate =>{
+      return {...prevTranslate, "language":translate.languageTotranslate, "languageTotranslate": translate.language} 
+    })
+  }
 
   useEffect(()=>{
     const url = `https://api.mymemory.translated.net/get?q=${translate.text}&langpair=${translate.language}|${translate.languageTotranslate}`
@@ -47,8 +59,8 @@ function App() {
         <img className="logo" src='images/logo.svg'></img>
       </header>
       <main>
-        <TranslateSection translateText={handleTranslate}/>
-        <TranslateSectionResult data={phraseTranslated} onData={handleTranslateFromChild}/>
+        <TranslateSection lang={langChange2} translateText={handleTranslate}/>
+        <TranslateSectionResult lang={langChange1} data={phraseTranslated} onData={handleTranslateFromChild} interchangeLanguage={handleChangeLanguage}/>
       </main>
     </div>
   )

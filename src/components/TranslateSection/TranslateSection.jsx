@@ -2,16 +2,19 @@ import React from "react"
 import { useState, useEffect } from "react"
 import './TranslateSection.css'
 
-export default function TranslateSection({translateText}) {
+export default function TranslateSection({translateText, lang}) {
 
     let synth
     let voices
+    let aLanguages
 
     const [toTranslate, setToTranslate] = useState({
         "text":'Hello, how are you?',
         "language":'en'
     })
     const [totalLetters, setTotalLetters] = useState(0)
+    //check initial render
+    const [isInitialRender, setIsInitialRender] = useState(true)
 
  //   const [textTrans, setTextTrans] = useState(translateText(text))
 
@@ -24,6 +27,32 @@ export default function TranslateSection({translateText}) {
         countLetters() 
     }, [toTranslate])
 
+    useEffect(()=> {
+        if(isInitialRender) {
+            setIsInitialRender(false)
+        } else {
+            console.log("lang useEffect")
+            console.log(lang)
+            //poner el lenguage al que venga
+                setToTranslate(prevToTranslate => {
+                    return {...prevToTranslate, "language": lang}
+                })
+            //quitar todos los gighlights
+                        //seleccionar el filtro del lenguaje correcto
+
+            aLanguages = document.querySelectorAll(".a-language")
+
+            aLanguages.forEach(filterLang => {
+                filterLang.classList.remove('active')
+                if(filterLang.attributes.value.nodeValue === lang){
+                    filterLang.classList.toggle('active')
+                }
+            })
+
+        }
+
+    },[lang])
+
     const countLetters = () => {
         setTotalLetters(toTranslate.text.length) 
     }
@@ -31,7 +60,7 @@ export default function TranslateSection({translateText}) {
     function translate() {
         translateText(toTranslate)
     }
-    let aLanguages
+
 
     const handleClick = (filterEl) => {
         if (filterEl !== undefined) {
