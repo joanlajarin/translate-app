@@ -1,7 +1,7 @@
 import React from "react"
-import { useState } from "react";
+import { useState } from "react"
 import './TranslateSectionResult.css'
-import { useEffect } from "react";
+import { useEffect } from "react"
 
 export default function TranslateSection({data, onData}) {
 
@@ -37,6 +37,12 @@ export default function TranslateSection({data, onData}) {
         window.alert("gola")
     }
 
+    const playText = () => {
+        
+    }
+    
+ 
+
     useEffect(() =>{
         aLanguagesTranslated = document.querySelectorAll(".a-language-translated")
         aLanguagesTranslated.forEach( filterLanguage => {
@@ -44,6 +50,19 @@ export default function TranslateSection({data, onData}) {
         })
         const btnChangeLang = document.getElementById("btn-change-languages")
         btnChangeLang.addEventListener("click", changeLanguage)
+
+        const btnPlayText = document.getElementById("btn-play-text-2")
+        btnPlayText.addEventListener("click", playText)
+
+        const textTranslate = document.getElementById("translate-2")
+        const copyText = () => {
+            console.log(textTranslate.value)
+            navigator.clipboard.writeText(textTranslate.value)
+            alert("Quote copied : " + textTranslate.value)
+        }
+        const btnCopyText = document.getElementById("btn-copy-text-2")
+        btnCopyText.addEventListener("click", copyText)
+
     },[])
 
 
@@ -53,7 +72,7 @@ export default function TranslateSection({data, onData}) {
                 <div className="languages-translated">
                     <a className="a-language-translated" value='en'>English</a>
                     <a className="a-language-translated active" value="fr">French</a>
-                    <a id="spanish-link" className="a-language-translated" value="es">Spanish<img src="/public/images/Expand_down.svg"></img></a>
+                    <a id="spanish-link" className="a-language-translated" value="es">Spanish<img src="/images/Expand_down.svg"></img></a>
                 </div>
                 <div>
                     <button className="btn-style" id="btn-change-languages">
@@ -61,15 +80,15 @@ export default function TranslateSection({data, onData}) {
                     </button>
                 </div>
             </div>
-        <textarea  className="text-to-translate" value={text} onChange={handleChange}></textarea >
+        <textarea  id="translate-2" className="text-to-translate" value={text} onChange={handleChange}></textarea >
             <div className="buttons">
                 <div className="btn">
-                    <button className="btn-style">
+                    <button className="btn-style" id="btn-play-text-2">
                         <img src="images/sound_max_fill.svg"></img>
                     </button> 
-                    <button className="btn-style">
+                    <button className="btn-style" id="btn-copy-text-2">
                         <img src="images/Copy.svg"></img>
-                    </button>
+                    </button> 
                 </div>
             </div>
         </section>
